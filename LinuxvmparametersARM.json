@@ -1,0 +1,41 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "projectName": {
+        "type": "string",
+        "metadata": {
+          "description": "Specifies a name for generating resource names."
+        },
+        "value":"testproject"
+      },
+      "location": {
+        "type": "string",
+        "value": "eastus",
+        "metadata": {
+          "description": "Specifies the location for all resources."
+        }
+      },
+      "adminUsername": {
+        "type": "string",
+        "metadata": {
+          "description": "Specifies a username for the Virtual Machine."
+        },
+        "value":"testuser"
+      },
+      "adminPublicKey": {
+        "type": "string",
+        "metadata": {
+          "description": "Specifies the SSH rsa public key file as a string. Use \"ssh-keygen -t rsa -b 2048\" to generate your SSH key pairs."
+        },
+        "value":"---- BEGIN SSH2 PUBLIC KEY ----\nComment: \"rsa-key-20230120\"\nAAAAB3NzaC1yc2EAAAADAQABAAABAQC14g3QYaiiAP0kskfRKOEPxMOkmfYR6kjO6zAhT17taqym/btnfv181oVG8do5tNyOMCGdN52abku7VgY4DbK5bneTGlfg2XrlFD34k8FWZQkdF9fRAtIfJfLCo9iVsew2Y7xbDgmCGhHc/yhJMPygfpqmWI2j0ArDh3M+E3aOUGlN4rM8Md41fmqth+dyS61c1Gq1tfpWcxz0UpDskLdQmPGF4nsZ6bNpv7Wcp4F15jd22e4jeWOJPYf3cb8RDthHbl+CwZA7tnYv4o/LCtQnA6RUf3clthEP00BHQ11JT2ncrXWVMa7MMTQdYSmGmQ/OwhO/Ko7hWjw26e40zSOh\n---- END SSH2 PUBLIC KEY ----\n"
+      },
+      "vmSize": {
+        "type": "string",
+        "value": "Standard_D2s_v3",
+        "metadata": {
+          "description": "description"
+        }
+      }
+    }
+}
