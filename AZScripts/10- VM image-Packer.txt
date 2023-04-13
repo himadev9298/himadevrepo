@@ -1,0 +1,29 @@
+echo "Create Resource Group"
+az group create \
+  --name azureRS1 \
+  --location centralindia
+
+echo "Create a virtual network with subnet1"
+az network vnet create \
+  --name vnet1 \
+  --resource-group azureRS1 \
+  --location centralindia \
+  --address-prefix 10.1.0.0/16 \
+  --subnet-name v1-subnet1 \
+  --subnet-prefix 10.1.1.0/24
+
+echo "Creaing NSG and Rules"
+az network nsg create -g azureRS1 -n azureRS1-nsg1
+az network nsg rule create -g azureRS1 --nsg-name azureRS1-nsg1 -n azureRS1-nsg1-rule  --priority 100 \
+    --source-address-prefixes '*' --source-port-ranges '*' \
+    --destination-address-prefixes '*' --destination-port-ranges '*' --access Allow \
+    --protocol Tcp --description "Allow all traffic"
+
+
+#!/bin/bash
+urn="MicrosoftWindowsServer:WindowsServer:2016-Datacenter:latest"
+az vm create --resource-group azureRS1 --name WINVM8GB --image $urn --vnet-name vnet1 \
+--subnet v1-subnet1 --admin-username adminsree --admin-password "India@1234567" --size Standard_B2ms \
+--nsg azureRS1-nsg1
+ 
+    

@@ -1,0 +1,74 @@
+echo "Create Resource Group"
+az group create \
+  --name azureRS1 \
+  --location centralindia
+
+echo "Create a virtual network with subnet1"
+az network vnet create \
+  --name vnet1 \
+  --resource-group azureRS1 \
+  --location centralindia \
+  --address-prefix 10.1.0.0/16 \
+  --subnet-name v1-subnet1 \
+  --subnet-prefix 10.1.1.0/24
+
+echo "Create two more subnets"
+az network vnet subnet create \
+  --address-prefix 10.1.2.0/24 \
+  --name v1-subnet2 \
+  --resource-group azureRS1 \
+  --vnet-name vnet1
+
+az network vnet subnet create \
+  --address-prefix 10.1.3.0/24 \
+  --name v1-subnet3 \
+  --resource-group azureRS1 \
+  --vnet-name vnet1
+
+echo "Create VM in subnet1"
+az vm create \
+  --resource-group azureRS1 \
+  --name V1_Subnet1_VM1 \
+  --image UbuntuLTS \
+  --vnet-name vnet1 \
+  --subnet v1-subnet1 \
+  --admin-username testuser \
+  --admin-password Himajasai@97 \
+  --size Standard_B1s
+
+echo "Create VM in subnet2"
+az vm create \
+  --resource-group azureRS1 \
+  --name V1_Subnet2_VM2 \
+  --image UbuntuLTS \
+  --vnet-name vnet1 \
+  --subnet v1-subnet2 \
+  --admin-username testuser \
+  --admin-password Himajasai@97 \
+  --size Standard_B1s
+
+echo "Crate virtual network in other location"
+az network vnet create \
+  --name vnet2 \
+  --resource-group azureRS1 \
+  --location eastus \
+  --address-prefix 10.2.0.0/16 \
+  --subnet-name v2-subnet1 \
+  --subnet-prefix 10.2.1.0/24 
+  
+
+
+echo "Create a VM in vnet2"
+az vm create \
+  --resource-group azureRS1 \
+  --name V2_Subnet1_VM1 \
+  --image UbuntuLTS \
+  --vnet-name vnet2 \
+  --subnet v2-subnet1 \
+  --admin-username testuser \
+  --admin-password Himaja@97 \
+  --size Standard_B1s 
+  
+
+az group delete --name azureRS1 --yes
+

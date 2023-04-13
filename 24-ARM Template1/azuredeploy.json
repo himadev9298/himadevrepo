@@ -1,0 +1,17 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "apiProfile": "2018-03-01-hybrid",
+    "resources": [
+      {
+        "type": "Microsoft.Storage/storageAccounts",
+        "name": "storageaccountnd1",
+        "location": "[resourceGroup().location]",
+        "apiVersion": "2019-04-01",
+        "sku": {
+          "name": "Standard_LRS"
+        },
+        "kind": "Storage"
+      }
+    ]
+}
