@@ -1,6 +1,0 @@
-$params = @{
-    storageAccountType = "Standard_LRS"
-    location = "eastus"
- }
-
- New-AzResourceGroupDeployment -ResourceGroupName TEST-ARM-RG -TemplateFile .\azuredeploy2.json -TemplateParameterObject $params  -Verbose
